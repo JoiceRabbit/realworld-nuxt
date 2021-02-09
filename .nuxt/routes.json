@@ -1,0 +1,43 @@
+[
+  {
+    "path": "/",
+    "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/layout",
+    "children": [
+      {
+        "path": "",
+        "name": "home",
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/home"
+      },
+      {
+        "path": "login",
+        "name": "login",
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/login"
+      },
+      {
+        "path": "register",
+        "name": "register",
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/login"
+      },
+      {
+        "path": "profile/:username",
+        "name": "profile",
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/profile"
+      },
+      {
+        "path": "settings",
+        "name": "settings",
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/settings"
+      },
+      {
+        "path": "editor/:slug?",
+        "name": "editor",
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/editor"
+      },
+      {
+        "path": "article/:slug",
+        "name": "article",
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/article"
+      }
+    ]
+  }
+]
