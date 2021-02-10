@@ -19,4 +19,15 @@ export default ({ store }) => {
   }, (err) => {
     return Promise.reject(err)
   }) 
+
+
+  request.interceptors.response.use(res => {
+    if (res.status === 200) {
+      return res
+    } else {
+      return Promise.reject(res)
+    }
+  }, error => {
+    return Promise.reject(error)
+  })
 }

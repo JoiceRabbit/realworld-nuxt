@@ -6,38 +6,46 @@
       {
         "path": "",
         "name": "home",
-        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/home"
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/home",
+        "_name": "_80aba4a8"
       },
       {
         "path": "login",
         "name": "login",
-        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/login"
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/login",
+        "_name": "_35d3d03c"
       },
       {
         "path": "register",
         "name": "register",
-        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/login"
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/login",
+        "_name": "_35d3d03c"
       },
       {
         "path": "profile/:username",
         "name": "profile",
-        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/profile"
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/profile",
+        "_name": "_2d70fc88"
       },
       {
         "path": "settings",
         "name": "settings",
-        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/settings"
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/settings",
+        "_name": "_5e2e7320"
       },
       {
         "path": "editor/:slug?",
         "name": "editor",
-        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/editor"
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/editor",
+        "_name": "_781a5afa"
       },
       {
         "path": "article/:slug",
         "name": "article",
-        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/article"
+        "component": "/Users/luotong/Desktop/realworld-nuxtjs/pages/article",
+        "_name": "_5fdc75ee"
       }
-    ]
+    ],
+    "_name": "_f82d9692"
   }
 ]

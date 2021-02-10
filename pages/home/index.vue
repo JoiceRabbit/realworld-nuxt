@@ -165,17 +165,22 @@ export default {
     const limit = 5
 
     const request = tab === 'global_feed' ? getArticles : getFeedArticles;
-    const [{ data }, tagRes] = await Promise.all([
+    const [{ data = {} }, tagRes] = await Promise.all([
       request({
         limit,
         offset: (page - 1) * limit,
         tag
+      }).then(res => res).catch(err => {
+        console.error(err)
+        process.client && alert('请登录');
+        return Promise.resolve({})
       }),
       getTags()
     ])
 
     const { tags } = tagRes.data
-    data.articles.forEach(article => article.favoriteDisabled = false)
+    const {articles = [], articlesCount = 0} = data
+    articles.forEach(article => article.favoriteDisabled = false)
 
     return {
       tab,
@@ -183,8 +188,8 @@ export default {
       page,
       tag,
       tags,
-      articles: data.articles || [],
-      articlesCount: data.articlesCount
+      articles,
+      articlesCount
     }
   },
   watchQuery: ['page', 'tab', 'tag'],
