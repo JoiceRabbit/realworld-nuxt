@@ -62,6 +62,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
+        # 这个端口是什么意思？
         port: ${{ secrets.PORT }}
         script: |
           cd /root/realworld-nuxt
