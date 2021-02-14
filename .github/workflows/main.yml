@@ -1,0 +1,71 @@
+# github actions识别的脚本
+# 阮一峰 github actions教程 http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html
+name: Publish And Deploy Demo
+# on字段指定触发 workflow 的条件，通常是某些事件。
+# 规定 当push的时候，tag以 v 开头，才会触发当前自动部署的任务
+on:
+  push:
+    tags:
+      - 'v*'
+
+# workflows jobs steps actions
+jobs:
+  # 第1个job, job_id是：build-and-deploy
+  build-and-deploy:
+    # 指定运行所需要的虚拟机环境。它是必填字段
+    runs-on: ubuntu-latest
+    # 指定每个 Job 的运行步骤，可以包含一个或多个步骤
+    steps:
+
+    # 下载源码
+    - name: Checkout
+      uses: actions/checkout@master
+
+    # 打包构建
+      # 步骤名称
+    - name: Build
+      uses: actions/setup-node@master
+      # 该步骤运行的命令或者 action
+    - run: npm install
+    - run: npm run build
+    - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json package-lock.json pm2.config.json
+
+    # 发布 Release
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@master
+      # 该步骤所需的环境变量
+      env:
+        GITHUB_TOKEN: ${{ secrets.REALWORLDNUXTTOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    # 上传构建结果到 Release
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.REALWORLDNUXTTOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./release.tgz
+        asset_name: release.tgz
+        asset_content_type: application/x-tgz
+
+    # 部署到服务器
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd /root/realworld-nuxt
+          wget https://github.com/JoiceRabbit/realworld-nuxt/releases/latest/download/release.tgz -O release.tgz
+          tar zxvf release.tgz
+          npm install --production
+          pm2 reload pm2.config.json
